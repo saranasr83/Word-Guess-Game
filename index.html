@@ -61,6 +61,7 @@
 
         function game() {
             var playerWrongGuessedChars = [];
+            var playerRightGuessedChars = [];
 
             //randomely choose a word from the list as the answer
             var targetWord = wordsList[Math.floor(Math.random() * wordsList.length)];
@@ -81,14 +82,21 @@
                     //display wrong user guesed char
                     playerWrongGuessedChars.push(playerGuesedChar)
                     document.getElementById("guesses").textContent = playerWrongGuessedChars
-                   
+
                     document.getElementById("remainingG").textContent = gameData.guessesLeft
 
                     //TODO: make sure that they dont guess it again
                 } else {
                     //if the guess was true, change the content of current word (#wordLetter) to playerGuesedChar.
-                    var soFarFound = revealCorrectCharOfWord(targetWord, playerGuesedChar);
+                    playerRightGuessedChars.push(playerGuesedChar)
+                    var soFarFound = revealCorrectCharOfWord(targetWord, playerRightGuessedChars);
                     document.getElementById("wordLetter").textContent = soFarFound
+
+                    if (targetWord === playerRightGuessedChars) {
+                        gameData.wins++
+                        gameData.guessesLeft = 0
+                        document.getElementById("gameover").textContent = "Congrats! YOU WON!"
+                    }
 
                 }
 
