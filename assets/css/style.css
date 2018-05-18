@@ -1,0 +1,7 @@
+body{
+    background: url(../images/hangman.jpg) fixed no-repeat center;
+    background-size: cover;   
+}
+.container{
+    margin-left: 60px;
+}
